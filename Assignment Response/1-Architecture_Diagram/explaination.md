@@ -11,7 +11,8 @@
 
 # Critical Data Paths
 RTP → Media Router → Preprocessing → Streaming ASR → Intent Engine → LLM (fast) → TTS → Caller
-this specific path handles the latency on how quick does the caller get a reply
+
+- this specific path handles the latency on how quick does the caller get a reply
 - to solve this we are using streaming ASR/TTS rather than batch models
 
 # Bottlenecks and mitigation
