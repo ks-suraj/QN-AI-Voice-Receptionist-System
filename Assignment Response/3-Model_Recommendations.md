@@ -65,7 +65,9 @@ My Recommendations :
 
 
 Cost Implications :
+
 Since assuming 1000s of daily operations : 
+
 1. ASR :
    Deepgram Nove ~ $0.0043 per min
    Daily cost ~ $25 ($20(standar) + $5(buffer)
@@ -82,3 +84,44 @@ Since assuming 1000s of daily operations :
    daily ~ $50 to $300 per day
    monthly ~ $1500 to $7500
 
+Cost Optimization :
+
+ASR : Using VAD can reduc upto 20 to 30% less audio, enabling streaming only when caller speaks
+TTS : Caching common phrases around 50% less TTS usage
+LLM : small Llama for simple replies, sending fewer tokens, caching repetitive repsonses
+
+
+Fallback Strategy :
+
+ASR Fallbacks : 
+- Primary → Deepgram
+- Backup → Google STT
+- If both fail → ask “Can you repeat?”
+- If still fails → send to human agent
+
+TTS Fallbacks : 
+- Primary → Amazon Polly
+- Backup → Google TTS
+- Last fallback → Pre-recorded audio messages
+
+LLM Fallbacks
+- Primary → GPT-4o / Claude
+- Backup → Mixtral 8x7B
+- Local fallback → Llama 3
+- Hard fallback → Static templates
+- Final → Human agent
+
+Open-Source / Self-Hosted :
+
+When YES (Use Open-Source):
+- Intent detection → Small local model
+- Cheap fallback model → Llama 3 / Mixtral
+
+When NO (Avoid Self-Hosting):
+- ASR (hard to match Deepgram/Google quality)
+- TTS (premium voices impossible to match)
+- Primary LLM (GPT/Claude give better quality + safety)
+
+→ Hybrid:
+Cloud for ASR, TTS, main LLM
+Local for intent + fallback LLM
