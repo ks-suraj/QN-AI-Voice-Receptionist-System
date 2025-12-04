@@ -38,3 +38,14 @@ Coming to WHY :
 - but these problems are comprimised for better audio quality and ASR which forwards to LLM and NLU for intent , which is the main core.
 - acc to my research WebRTC overhead gives around 10 to 15% more CPU , which shall be acceptable for quality
 - Alternatives rejected : 1 - Only WebSockets (cannot handle jitter - poor audio) ; 2 - gRPC (not optimized friendly for real time)
+
+
+**Dialogue Framework** - 
+A combination of probabilistic and deterministic helps any framework to solve things better, hence an approach of State Machine (deteministic) and LLM (probablistic), State Machines handles regualted work flows and an LLM agent handles queries, chats.
+
+Coming to WHY :
+- Reliable to data and process handling and flexiblity towards workflows
+- A bit complex but handles flowcharts and prompts at the same time
+- Costs - State machines : mostly zero ; LLMs - depen\ds on selection, lower if qunatization or SLMs are opted
+- Continuous agene monitioring and intiating strict Guardrails, should handle hallucinations
+- Alternatives Rejected and why : 1 - Pure LLM (Unpredictable, high latency and cost) ; 2 - Pure State Machine (too static and cannot handle natualness) ; 3 - Rasa (Slower iteration, heavy labeled training datasets)
