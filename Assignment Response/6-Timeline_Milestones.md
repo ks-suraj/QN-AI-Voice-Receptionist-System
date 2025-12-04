@@ -7,11 +7,11 @@ I felt dividing into 5 phases be better, which goes as  :
 
 Phase 1: Infrastructure Setup (Weeks 1–2)
 - Milestones:
-1.Kubernetes cluster created (EKS or GKE)
-2.CI/CD pipeline set up
-3.Redis, Kafka, Qdrant, Prometheus, Grafana provisioned
-4.Logging (ELK or Loki) integrated
-5.Telephony numbers + SIP trunking configured (Twilio)
+1. Kubernetes cluster created (EKS or GKE)
+2. CI/CD pipeline set up
+3. Redis, Kafka, Qdrant, Prometheus, Grafana provisioned
+4. Logging (ELK or Loki) integrated
+5. Telephony numbers + SIP trunking configured (Twilio)
 - Measurable Deliverable:
 A functioning infrastructure that can run microservices, stream audio, and push logs/metrics.
 - Dependencies:
