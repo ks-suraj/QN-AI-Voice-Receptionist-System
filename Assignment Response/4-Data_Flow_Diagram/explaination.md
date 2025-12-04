@@ -2,6 +2,8 @@
 
 I have opted to draw the data flow diagram of inbound and outbound call flow, provided in the data flow.jpg
 
+For all the nodes where analytics is used it is better to either use snowflake (reliable) or clickhouse (self hosted burden)
+
 **Inbound Call Flow Explaination** : 
 
 1. Data Captured at Each Step:
@@ -43,3 +45,47 @@ I have opted to draw the data flow diagram of inbound and outbound call flow, pr
 - Kafka event for intent
 - CRM webhook on call completion
 - S3 event when recording uploaded
+
+
+**Outbound Campaign (Call) Flow Explaination** : 
+
+
+1. Data Captured at Each Step:
+- Lead Data → lead_id, phone number, metadata
+- Dialing → call status events
+- Conversation → transcripts, intents, replies
+- Disposition → outcome codes
+- Analytics → call duration, sentiment, resolution
+
+2. Where Data is Stored:
+- Lead metadata → PostgreSQL / CRM
+- Transcripts → Snowflake
+- Vectors → Qdrant
+- Call events → Kafka
+- Session state → Redis
+- Recordings → S3
+
+3.Real-Time Steps:
+- Dialing, media streaming, ASR, intent detection, LLM response, TTS playback
+
+4. Batch Steps:
+- Campaign reporting
+- Lead scoring updates
+- Daily analytics ETL
+
+5. Failure / Retry Points:
+- Call not answered → automatic retry rules
+- ASR/LLM failure → fallback templates
+- CRM API failure → queued retry
+- Dialer congestion → rate limiting
+
+6. State Maintenance:
+- Campaign service keeps dialing state
+- Redis keeps per-call session state
+- State machine manages calling workflow (intro, qualification, closing)
+
+7. Event Triggers / Webhooks:
+- Campaign start trigger
+- Twilio call status events
+- Kafka events for transcripts and dispositions
+- CRM webhook for updating lead score or stage
