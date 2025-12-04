@@ -6,6 +6,7 @@ I felt dividing into 5 phases be better, which goes as  :
 
 
 Phase 1: Infrastructure Setup (Weeks 1–2)
+
 - Milestones:
 1. Kubernetes cluster created (EKS or GKE)
 2. CI/CD pipeline set up
@@ -23,6 +24,7 @@ Basic cluster + Twilio connectivity + logging. Optional components (Snowflake, Q
 
 Phase 2: Core System Development (Weeks 3–6)
 This is where the system becomes operational.
+
 Milestones:
 1. Media plane service running (SFU + AEC + VAD + noise suppression)
 2. Streaming ASR integration with Deepgram
@@ -41,6 +43,7 @@ ASR stability issues, media pipeline tuning for jitter/latency.
 Only one ASR provider, one LLM, one TTS provider, minimal intents, no analytics.
 
 Phase 3: Third-Party Integrations (Weeks 7–9)
+
 Milestones:
 1. CRM integration (read + disposition write-back)
 2. S3 recording upload + batch transcription job
@@ -59,6 +62,7 @@ CRM API rate limits, Snowflake schema issues, Qdrant read/write performance.
 Skip RAG and Snowflake; just store recordings and transcripts for now.
 
 Phase 4: Testing, Optimization & Hardening (Weeks 10–12)
+
 Milestones:
 1. Latency tuning for ASR → intent → LLM → TTS pipeline
 2. Stress tests (100+ concurrent calls)
@@ -76,6 +80,7 @@ Performance bottlenecks in SFU or ASR capacity, TTS delays, infrastructure scali
 Basic load test, manual QA, minimal guardrails.
 
 Phase 5: Deployment & Launch (Weeks 13–14)
+
 Milestones:
 1. Final environment setup (production cluster)
 2. Canary release (5–10% traffic)
