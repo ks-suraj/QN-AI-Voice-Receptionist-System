@@ -18,6 +18,7 @@
 
 **Telephony Provider** - 
 After assessoing the use case, it would be better to go with  - #Twilio SIP Trunks + Voice API
+
 Coming to WHY :
  - Twilio is a global provider, especially reliable for PSTN -> SIP connectvity
  - has built in call routing, recording, phone number provision
