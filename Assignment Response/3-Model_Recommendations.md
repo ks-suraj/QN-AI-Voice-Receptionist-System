@@ -1,3 +1,12 @@
+#Deliverable 3 :  LLM/ASR/TTS Model Recommendations
+
+
+Since our project relies on latency, audio processing, real time decisions, LLM (intelligent) conversations, so based on that, the main factors to be taken in consideration are : 
+1. Speed (On quick actions and communications, with reduced latency)
+2. Stability (no hallucinations)
+3. Scalability (handling larger number of calls per day)
+
+   
 1. Speech to Text {ASR model} :
 selected Deepgram, Google Cloud STT, Open AI WHisper
 
@@ -9,3 +18,44 @@ selected Deepgram, Google Cloud STT, Open AI WHisper
 | **OpenAI Whisper **            | Community streaming | Medium     | Good (best in clean audio)                 | Low | Batch transcription                  | High accuracy, GPU heavy, less ideal for streaming.(w.r.t self hosted ONLY                    |
 | **AssemblyAI**                       | Yes                 | Low        | Very Good                                  | Mid–High           | Real-time + rich after-call analytics | Built-in summarization + toxic detection.                              |
 | **Speechmatics**                     | Yes                 | Low–Medium | Excellent multilingual & accent robustness | Mid                | Multinational contact centers        | Very strong in accents & dialects.                                     |
+
+
+My recommendations : 
+- For inbound calls -  Deepgram Nova - Best for real-time latency, streaming, better for telephony (if not then Google cloud STT for simpler infra)
+- Batch Transcription - Only if we self host, then OpenAI whisper for large scale, if no self hosting then batch transcription in Deepgrams pre recorded ASR API, better for telephony audio support, lower cost compared to google and azyre
+- For handling noise - we already opted for AEC, VAD and noise suppresion in SFY, that should take care of it
+- For accent - Deepgram (which i recommended) would solve that issue too.
+
+2. TTS model comparision :
+
+
+| TTS Provider                        | Naturalness          | Latency  | Cost     | Voice Customization | Best Use Case                 | Notes                                    |
+| ----------------------------------- | -------------------- | -------- | -------- | ------------------- | ----------------------------- | ---------------------------------------- |
+| **Amazon Polly Neural **      | Very Good            | Very Low | Low–Mid  | Good                | Default production TTS        | Most stable + scalable option.           |
+| **ElevenLabs**                      | Excellent  | Low      | High     | Excellent + cloning | Premium user-facing AI agents | Human-like voices but pricey.            |
+| **Google WaveNet**                  | Very Good            | Low      | Mid      | Good                | Global deployments            | Clean waveforms & stable.                |
+| **Azure Neural TTS**                | Very Good            | Low      | Mid      | Good                | Enterprise apps               | Custom neural voice models available.    |
+| **Play.ht**                  | Very High            | Low      | Mid–High | Excellent           | Marketing/brand personas      | Voice cloning + expressive tone.         |
+| **Coqui TTS**  | High                 | Medium   | Very Low | Good with training  | Self-hosting & custom voices  | Good for companies wanting full control. |
+
+My Recommendation : 
+- Amazon polly Neural : lower latency, lower cost, highly reliable, and also heard from direct experienced clients, can also go with google WaveNet (go for ElevenLabs for premium servies, but costly)
+
+3. LLMs for intent recognition and response :
+   
+we have to opt for lightweight intent classifier, llm for response generation and adaptable to state machine too
+
+| Model                               | Latency             | Quality        | Cost                    | Safety      | Best Use Case                      | Notes                                         |
+| ----------------------------------- | ------------------- | -------------- | ----------------------- | ----------- | ---------------------------------- | --------------------------------------------- |
+| **OpenAI GPT-4o / 4.1**             | Low–Medium          | 🔹Best         | High                    | Excellent   | Complex reasoning + safe responses | Best overall for natural voice agents.        |
+| **Claude 3.5 Sonnet**               | Low                 | Excellent      | High                    | Best safety | Complex dialogues                  | Very stable + less hallucinations.            |
+| **Llama 3 (7B/70B quantized)**      | Very Low (if local) | Good–Very Good | Low (self-hosted infra) | Medium      | Fast intent + short replies        | Your architecture supports this nicely.       |
+| **Mixtral 8x7B**                    | Low                 | Good           | Low                     | Medium      | Cheaper LLM fallback               | Good latency on GPUs, cheaper inference.      |
+| **Google Gemini 1.5 Flash**  | Low                 | High           | Medium                  | High        | Fast real-time reasoning           | Best for “fast but smart” tasks.              |
+| **Mistral Nemo**             | Low                 | Good           | Low                     | Medium      | Self-hosting                       | Good for on-prem latency-sensitive workloads. |
+
+
+My Recommendations : 
+- Using seperate models for intent classification (detection) and Response Generation would be better, as the former takes charge of recognition, hence should be deteministic,cheap,accurate and fast and the later deals with response which invlovles expressivness, context rich and safety.
+- for intent detection - going with Llama 3 8b (locally qquantized one) - cheap, super fast, stable
+- for response generation - since this carries compilance and involves in direct human interactions, going with cloud used (API based) GPT 4o (complex queries handling) or Mixtral 56B (covers mid tier segment)
