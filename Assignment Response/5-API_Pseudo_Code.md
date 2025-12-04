@@ -320,7 +320,7 @@ Why this :
 - keep a flag check list for any roll outs
 - also best practice to keep older apis running while new pop up
 
-14. Monitoring :
+14. Monitoring(thinks to keep an eye on) :
 - ASR latency
 - LLM response time and number of time it fallbacks
 - kafka logs
