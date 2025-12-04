@@ -1,6 +1,6 @@
 **Deliverable 5 : Pseudo code(Only logic)**
 
-As far as i have the domain expertised and the research i did for our current project, the pseudo logic that i would be covering would contain : 
+As far as i have the domain expertise and the research i did for our current project, the pseudo logic that i would be covering would contain : 
 - Core processing loop (real-time call handling)
 - Critical decision logic (how actions are chosen)
 - Error handling and fallbacks
@@ -131,13 +131,13 @@ Why this :
 4. Deterministic flows (state machine (only for simple actions)) :
 ```
 def run_deterministic_flow(intent_name, session):
-    # handle very specific tasks without calling LLM
+    # handling very specific tasks without calling LLM
     if intent_name == "check_balance":
         balance = crm_get_balance(session.get("customer_id"))
         return f"Your current balance is {balance} rupees."
 
     if intent_name == "pay_bill":
-        # ask for a confirmation step that is deterministic
+        # asking for a confirmation step that is deterministic
         if session.get("state") != "awaiting_payment_confirm":
             session["state"] = "awaiting_payment_confirm"
             redis_save_session(session["call_id"], session)
@@ -180,7 +180,7 @@ def build_and_generate_response(intent, session, recent_text):
 
     # quickly check for obvious factual errors or policy triggers
     if not passes_basic_checks(answer, docs):
-        return "I am not confident in that answer. Let me connect you to an agent."
+        return "I am not confident in that answer. Let me connect you to a our agent."
 
     return answer
 ```
@@ -195,7 +195,7 @@ def play_text(call_id, text):
     # create a cache key for this text
     key = "tts_cache:" + simple_hash(text)
 
-    # check cached audio first
+    # check the cached audio first
     s3_key = redis_get(key)
     if s3_key:
         audio = s3_download(s3_key)
@@ -225,7 +225,7 @@ Why this :
 7. Finalizing the call and initiating batch work :
 ```
 def finalize_call(call_id, session):
-    # ask media server to close and upload the recording
+    # asking media server to close and upload the recording
     s3_recording_key = media_server.finalize_and_upload(call_id)
 
     # notify the batch pipeline to transcribe the full recording
@@ -247,7 +247,7 @@ Why this :
 8. Idempotency helpers (safe area to retry) :
 ```
 def write_once(op_id, action):
-    # try to reserve this operation
+    # trying to reserve this operation for smoothness
     reserved = redis_setnx(op_id, "in-progress", ttl=3600)
     if not reserved:
         # someone else already did this operation
