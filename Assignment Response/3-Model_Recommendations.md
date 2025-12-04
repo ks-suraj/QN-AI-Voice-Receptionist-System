@@ -123,5 +123,5 @@ When NO (Avoid Self-Hosting):
 - Primary LLM (GPT/Claude give better quality + safety)
 
 → Hybrid:
-Cloud for ASR, TTS, main LLM
-Local for intent + fallback LLM
+- Cloud for ASR, TTS, main LLM
+- Local for intent + fallback LLM
