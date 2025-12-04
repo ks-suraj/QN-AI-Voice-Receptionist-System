@@ -27,11 +27,11 @@ Also assuming w.r.t the technologies i have opted for :
 
 
 **Pseudo Code** : 
-- Main real-time call loop :
+1. Main real-time call loop :
 ```
-# handle one incoming call from start to finish
+# handling one incoming call from start to finish for better streamline (prefered)
 def handle_inbound_call(call_id, caller_number):
-    # create or restore session in Redis
+    # creating or restoring session in Redis
     session = redis_get_or_create_session(call_id)
     session["state"] = "connected"
     session["context"] = []      # short list of last few turns
@@ -39,25 +39,25 @@ def handle_inbound_call(call_id, caller_number):
 
     # subscribe to audio chunks from the media server
     for pcm_chunk in media_server.stream_audio(call_id):
-        # skip periods of silence to save work
+        # skipping periods of silence to save work
         if not voice_activity_detected(pcm_chunk):
             continue
 
-        # try to get text for this audio chunk from ASR
+        # trying to get text for this audio chunk from ASR
         transcript = asr_stream_transcribe(pcm_chunk, call_id)
         if not transcript:
             # if ASR fails for this chunk, log and continue
             log_event("asr_chunk_failed", call_id)
             continue
 
-        # publish transcript to analytics stream (non-blocking)
+        # publishing transcript to analytics stream (non-blocking)
         kafka_publish("transcripts_realtime", {"call_id": call_id, "text": transcript})
 
-        # add user text to short context
+        # better to add user text to short context
         session["context"].append({"role": "user", "text": transcript})
         redis_save_session(call_id, session)
 
-        # quick intent detection using a small local model
+        # quick intent detection using a small local model (llama)
         intent = detect_intent_fast(transcript)
 
         # if the intent is unclear, ask user to repeat
@@ -71,10 +71,10 @@ def handle_inbound_call(call_id, caller_number):
         if is_simple_action(intent["name"]):
             response = run_deterministic_flow(intent["name"], session)
         else:
-            # otherwise build a grounded reply using retrieval + LLM
+            # otherwise build a grounded reply using retrieval + LLM (GPT)
             response = build_and_generate_response(intent, session, transcript)
 
-        # run safety checks and add small personal touches
+        # run safety checks and add small personal touches (personalization addition)
         response = apply_safety_and_personalization(response, session)
 
         # convert final text to audio and play back
@@ -87,3 +87,11 @@ def handle_inbound_call(call_id, caller_number):
     # after stream ends (caller hung up)
     finalize_call(call_id, session)
 ```
+Why this : 
+- Keeps a short memory of the call in Redis.
+- Listens to audio, skips silence to save work.
+- Converts audio to text chunk-by-chunk.
+- Does a fast intent check; if intent is simple, follow a deterministic flow; otherwise call the LLM with retrieved context.
+- Checks the reply for safety, personalizes it, then plays it back.
+- When the call ends, it runs final steps like upload and analytics.
+
