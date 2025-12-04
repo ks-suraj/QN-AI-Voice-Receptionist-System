@@ -64,3 +64,19 @@ II. Business Challenges ( used AI) :
 - Why it matters: Voice systems require specialized knowledge (SIP, WebRTC, ASR, LLM orchestration). Hard to hire for.
 - Risk Level: Low–Medium
 - Mitigation: Document architecture well, create internal training guides, modularize components so general engineers can contribute, and rely on managed services for telephony/ASR/TTS when possible.
+
+III. Additional Openrational Challenges : 
+1. Challenge: Monitoring and debugging real-time pipelines
+- Why it matters: Debugging audio + ASR + LLM interactions is complex.
+- Risk Level: Medium
+- Mitigation: Use centralized logs, call traces, ASR/LLM latency dashboards, and correlation IDs across the entire call path.
+
+2. Challenge: Human-in-the-loop escalation logic
+- Why it matters: Wrong escalation or missing escalation harms both cost efficiency and customer experience.
+- Risk Level: Low
+- Mitigation: Set clear rules (low confidence, repeated misunderstandings), provide agents with transcripts, and enable soft handoff.
+
+3. Challenge: System uptime and recovery
+- Why it matters: Voice systems must behave like call centers—they cannot go down unexpectedly.
+- Risk Level: High
+- Mitigation: Use health checks, multi-zone deployment, graceful degradation (template-only mode), and well-defined failover scenarios.
