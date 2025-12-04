@@ -29,6 +29,7 @@ Coming to WHY :
 
 **Real-Time Protocol** - 
 As per our requirment , a major part of WebRTC and also benefits of Websockets, basically a hybrid system
+
 Coming to WHY :
 - WebRTC - For low latency, helps in bidirectional transfer of audio packets, handles jitter buffer, packet loss recovery, ICE/STUN/TURN for NAT traversal which gives us a better grade of telephony system, smoother integration with SFU
 - WebSockets - only used for metadata signaling just to avoid media blockage channel
