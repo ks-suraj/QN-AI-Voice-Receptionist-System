@@ -74,15 +74,15 @@ Since assuming 1000s of daily operations :
    - Monthly cost ~ $750
    - Assuming roughly ~ $1000
 2. TTS :
-   Amazon Polly ~ $0.001 (Neural)
-   Daily cost ~ $50 per day
-   Monthly ~ $1500
+   - Amazon Polly ~ $0.001 (Neural)
+   - Daily cost ~ $50 per day
+   - Monthly ~ $1500
 
 3. LLMs :
-   around 8 to 12 LLM interactions per call ~ 10000 llm calls per day
-   GPT 4o - depends on token ~ $0.005 to $0.03
-   daily ~ $50 to $300 per day
-   monthly ~ $1500 to $7500
+   - around 8 to 12 LLM interactions per call ~ 10000 llm calls per day
+   - GPT 4o - depends on token ~ $0.005 to $0.03
+   - daily ~ $50 to $300 per day
+   - monthly ~ $1500 to $7500
 
 Cost Optimization :
 
