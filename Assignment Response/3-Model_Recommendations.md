@@ -6,6 +6,8 @@ Since our project relies on latency, audio processing, real time decisions, LLM 
 2. Stability (no hallucinations)
 3. Scalability (handling larger number of calls per day)
 
+
+
    
 1. Speech to Text {ASR model} :
 selected Deepgram, Google Cloud STT, Open AI WHisper
