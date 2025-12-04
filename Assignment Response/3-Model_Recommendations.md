@@ -2,9 +2,9 @@ Deliverable 3 :  LLM/ASR/TTS Model Recommendations
 
 
 Since our project relies on latency, audio processing, real time decisions, LLM (intelligent) conversations, so based on that, the main factors to be taken in consideration are : 
-1. Speed (On quick actions and communications, with reduced latency)
-2. Stability (no hallucinations)
-3. Scalability (handling larger number of calls per day)
+- Speed (On quick actions and communications, with reduced latency)
+- Stability (no hallucinations)
+- Scalability (handling larger number of calls per day)
 
 
 
