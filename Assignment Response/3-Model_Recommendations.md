@@ -69,10 +69,10 @@ Cost Implications :
 Since assuming 1000s of daily operations : 
 
 1. ASR :
-   Deepgram Nove ~ $0.0043 per min
-   Daily cost ~ $25 ($20(standar) + $5(buffer)
-   Monthly cost ~ $750
-   Assuming roughly ~ $1000
+   - Deepgram Nove ~ $0.0043 per min
+   - Daily cost ~ $25 ($20(standar) + $5(buffer)
+   - Monthly cost ~ $750
+   - Assuming roughly ~ $1000
 2. TTS :
    Amazon Polly ~ $0.001 (Neural)
    Daily cost ~ $50 per day
