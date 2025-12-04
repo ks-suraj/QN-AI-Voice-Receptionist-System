@@ -50,7 +50,7 @@ we have to opt for lightweight intent classifier, llm for response generation an
 
 | Model                               | Latency             | Quality        | Cost                    | Safety      | Best Use Case                      | Notes                                         |
 | ----------------------------------- | ------------------- | -------------- | ----------------------- | ----------- | ---------------------------------- | --------------------------------------------- |
-| **OpenAI GPT-4o / 4.1**             | Low–Medium          | 🔹Best         | High                    | Excellent   | Complex reasoning + safe responses | Best overall for natural voice agents.        |
+| **OpenAI GPT-4o / 4.1**             | Low–Medium          | Best         | High                    | Excellent   | Complex reasoning + safe responses | Best overall for natural voice agents.        |
 | **Claude 3.5 Sonnet**               | Low                 | Excellent      | High                    | Best safety | Complex dialogues                  | Very stable + less hallucinations.            |
 | **Llama 3 (7B/70B quantized)**      | Very Low (if local) | Good–Very Good | Low (self-hosted infra) | Medium      | Fast intent + short replies        | Your architecture supports this nicely.       |
 | **Mixtral 8x7B**                    | Low                 | Good           | Low                     | Medium      | Cheaper LLM fallback               | Good latency on GPUs, cheaper inference.      |
