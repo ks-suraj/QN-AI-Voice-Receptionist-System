@@ -65,6 +65,7 @@ For all the nodes where analytics is used it is better to either use snowflake (
 - Session state → Redis
 - Recordings → S3
 
+
 3.Real-Time Steps:
 - Dialing, media streaming, ASR, intent detection, LLM response, TTS playback
 
