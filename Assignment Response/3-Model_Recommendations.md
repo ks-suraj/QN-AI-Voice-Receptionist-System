@@ -1,4 +1,4 @@
-#Deliverable 3 :  LLM/ASR/TTS Model Recommendations
+Deliverable 3 :  LLM/ASR/TTS Model Recommendations
 
 
 Since our project relies on latency, audio processing, real time decisions, LLM (intelligent) conversations, so based on that, the main factors to be taken in consideration are : 
@@ -25,6 +25,7 @@ My recommendations :
 - Batch Transcription - Only if we self host, then OpenAI whisper for large scale, if no self hosting then batch transcription in Deepgrams pre recorded ASR API, better for telephony audio support, lower cost compared to google and azyre
 - For handling noise - we already opted for AEC, VAD and noise suppresion in SFY, that should take care of it
 - For accent - Deepgram (which i recommended) would solve that issue too.
+
 
 2. TTS model comparision :
 
@@ -59,3 +60,23 @@ My Recommendations :
 - Using seperate models for intent classification (detection) and Response Generation would be better, as the former takes charge of recognition, hence should be deteministic,cheap,accurate and fast and the later deals with response which invlovles expressivness, context rich and safety.
 - for intent detection - going with Llama 3 8b (locally qquantized one) - cheap, super fast, stable
 - for response generation - since this carries compilance and involves in direct human interactions, going with cloud used (API based) GPT 4o (complex queries handling) or Mixtral 56B (covers mid tier segment)
+
+
+Cost Implications :
+Since assuming 1000s of daily operations : 
+1. ASR :
+   Deepgram Nove ~ $0.0043 per min
+   Daily cost ~ $25 ($20(standar) + $5(buffer)
+   Monthly cost ~ $750
+   Assuming roughly ~ $1000
+2. TTS :
+   Amazon Polly ~ $0.001 (Neural)
+   Daily cost ~ $50 per day
+   Monthly ~ $1500
+
+3. LLMs :
+   around 8 to 12 LLM interactions per call ~ 10000 llm calls per day
+   GPT 4o - depends on token ~ $0.005 to $0.03
+   daily ~ $50 to $300 per day
+   monthly ~ $1500 to $7500
+
