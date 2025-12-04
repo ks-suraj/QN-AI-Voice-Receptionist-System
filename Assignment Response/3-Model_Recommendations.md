@@ -104,7 +104,7 @@ TTS Fallbacks :
 - Backup → Google TTS
 - Last fallback → Pre-recorded audio messages
 
-LLM Fallbacks
+LLM Fallbacks :
 - Primary → GPT-4o / Claude
 - Backup → Mixtral 8x7B
 - Local fallback → Llama 3
